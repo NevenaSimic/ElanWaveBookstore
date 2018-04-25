@@ -1,0 +1,65 @@
+﻿@model IEnumerable<ElanWaveBookstore.Models.Book>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LogLayout.cshtml";
+}
+
+
+<div style="padding-left:150px;position:center;height:auto;padding-right:150px;padding-bottom:150px">
+    <br><br>
+    <h2 style="font-weight:500">Books</h2>
+
+    <table class="table" border="1" cellpadding="5" cellspacing="0" style="border-collapse:collapse;table-layout:auto;width:100%">
+        <tr>
+            <th style="background-color:lightgrey">
+                @Html.DisplayNameFor(model => model.ISBN)
+            </th>
+            <th style="background-color:lightgrey">
+                @Html.DisplayNameFor(model => model.Title)
+            </th>
+            <th style="background-color:lightgrey">
+                @Html.DisplayNameFor(model => model.Author)
+            </th>
+            <th style="background-color:lightgrey">
+                @Html.DisplayNameFor(model => model.Genre)
+            </th>
+            <th style="background-color:lightgrey" colspan="2">
+                Actons
+            </th>
+        </tr>
+
+        @foreach (var item in Model)
+
+            //if item.IsDeleted == 0
+        {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.ISBN)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Title)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Author)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Genre)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "EditBook", new { id = item.BookID })
+            </td>
+            <td>
+                @Html.ActionLink("Delete", "DeleteBook", new { id = item.BookID })
+            </td>
+        </tr>
+        }
+
+    </table>
+
+    <br>
+    <input type="button" value="Add" onclick="location.href='@Url.Action("CreateBook", "Book")'" style="width:90px;height:30px" />
+    
+</div>
+
+

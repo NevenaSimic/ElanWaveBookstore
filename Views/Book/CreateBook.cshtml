@@ -1,0 +1,71 @@
+﻿@model ElanWaveBookstore.Models.Book
+
+@{
+    ViewBag.Title = "CreateBook";
+    Layout = "~/Views/Shared/_LogLayout.cshtml";
+}
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <h5 style="text-align:right;padding-right:20px;font-weight: normal">
+        *Mandatory field
+    </h5>
+
+    <p>
+        <h2 style="padding-left:150px; font-weight:500">Add/edit book</h2>
+    </p>
+
+    <div style="padding-left:150px;height:auto">
+        <br>
+        <table>
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <tr>
+                <td height="30"> @Html.LabelFor(model => model.ISBN, htmlAttributes: new { @class = "control-label col-md-2" }) </td>
+                <td height="30">
+                    @Html.EditorFor(model => model.ISBN, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.ISBN, "", new { @style = "color:red" })
+                </td>
+            </tr>
+
+            <tr>
+                <td height="30"> @Html.LabelFor(model => model.Title, htmlAttributes: new { @class = "control-label col-md-2" }) </td>
+                <td height="30">
+                    @Html.EditorFor(model => model.Title, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Title, "", new { @style = "color:red" })
+                </td>
+            </tr>
+
+            <tr>
+                <td height="30"> @Html.LabelFor(model => model.Author, htmlAttributes: new { @class = "control-label col-md-2" }) </td>
+                <td height="30">
+                    @Html.EditorFor(model => model.Author, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Author, "", new { @style = "color:red" })
+                </td>
+            </tr>
+
+            <tr>
+                <td height="30"> @Html.LabelFor(model => model.Genre, htmlAttributes: new { @class = "control-label col-md-2" }) </td>
+                <td height="30">
+                    @Html.EditorFor(model => model.Genre, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Genre, "", new { @style = "color:red" })
+                </td>
+            </tr>
+        </table>
+
+        <p style="display:block; padding-left:75px">
+            <input type="submit" value="Save" />
+            @Html.ActionLink("Cancel", "Index")
+        </p>
+
+    </div>
+
+
+}
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

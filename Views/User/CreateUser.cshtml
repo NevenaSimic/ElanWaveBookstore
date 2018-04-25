@@ -1,0 +1,81 @@
+﻿@model ElanWaveBookstore.Models.User
+
+@{
+    ViewBag.Title = "CreateUser";
+}
+
+
+@using (Html.BeginForm())
+{
+@Html.AntiForgeryToken()
+
+<h5 style="text-align:right;padding-right:20px;font-weight: normal">
+    *Mandatory field
+</h5>
+
+<p>
+    <h2 style="padding-left:150px; font-weight:500">Sign up</h2>
+</p>
+
+<form action="/User/CreateUser" method="post">
+    <div style="padding-left:150px;">
+        <br>
+        <table>
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <tr id="Status">
+                <td height="30">@Html.LabelFor(model => model.Username, htmlAttributes: new { @class = "control-label col-md-2" })</td>
+                <td height="30">
+                    @Html.EditorFor(model => model.Username, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Username, "", new { @style = "color:red" })
+                </td>
+            </tr>
+
+            <tr>
+                <td height="30">@Html.LabelFor(model => model.Password, htmlAttributes: new { @class = "control-label col-md-2" })</td>
+                <td height="30">
+                    @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Password, "", new { @style = "color:red" })
+                </td>
+            </tr>
+
+            <tr>
+                <td height="30">@Html.LabelFor(model => model.RepeatedPassword, htmlAttributes: new { @class = "control-label col-md-2" })</td>
+                <td height="30">
+                    @Html.EditorFor(model => model.RepeatedPassword, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.RepeatedPassword, "", new { @style = "color:red" })
+                </td>
+            </tr>
+          </table>
+       </div>
+
+    <p style="display:block; padding-left:300px;">
+        <input id="ConfirmButton" type="submit" value="Confirm" onsubmit="location.href='@Url.Action("Index", "Book")'" />
+        <a href="" style="color:#555151">Cancel</a>
+    </p>
+</form>
+
+    @*<script>
+        function UserCheck() {
+            $("#Status").html("Checking..");
+            $.post("@Url.Action("CheckUsernameExist", "User")",
+                {
+                    userdata: $("#Username").val()
+                },
+                function (data) {
+                    if (data == 0) {
+                        $("#Status").html('<font color="Green">Available, you can take it.</font>');
+                        $("Username").css("border-color", "Green");
+                    }
+                    else {
+                        $("#Status").html('<font color="Red">This name is taken! Try another.</font>');
+                        $("Username").css("border-color", "Red");
+                    }
+                })
+        }
+    </script>*@
+}
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
